@@ -2,12 +2,15 @@ import React ,{ useEffect,useMemo ,useState} from 'react';
 import TableContainer from "../../utils/TableContainer";
 import Layout from '../Layout/Layout';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation ,useParams} from 'react-router-dom';
 
 
 
 const AllUsers = () => {
-    const location=useLocation()
+    // const location=useLocation()
+    const param =useParams()
+    console.log(param);
+    
     // console.log(location.pathname.slice(1));
     
     const [users,setUsers] = useState([]);
@@ -15,7 +18,7 @@ const AllUsers = () => {
     useEffect(() => {
         (async ()=>{
             try {
-                const response =await axios.get(`http://localhost:5000/api/users/user-by-role/${location.pathname.slice(1)}`)
+                const response =await axios.get(`http://localhost:3000/users/${param.role}`)
                 let allUsers = response.data.map(item=>{
                     return {
                         ...item,
@@ -33,16 +36,16 @@ const AllUsers = () => {
         })()
     }, [count ,location.pathname]);
     const columns = useMemo(
-        () => location.pathname === 'Learner' ? [
+        () => param.role === 'customer' ? [
             {
                 header: 'Image',
-                accessorKey: 'profileImage',
+                accessorKey: 'photoUrl',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
             {
-                header: 'Nom et Prénom',
-                accessorKey: 'name',
+                header: 'Username',
+                accessorKey: 'username',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
@@ -53,14 +56,14 @@ const AllUsers = () => {
                 enableSorting: true,
             },
             {
-                header: 'Nombre Of Courses',
-                accessorKey: 'courses',
+                header: 'Address',
+                accessorKey: 'address',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
             {
-                header: 'Nombre Of Completed Courses',
-                accessorKey: 'completedCourses',
+                header: 'Phone Number',
+                accessorKey: 'phoneNumber',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
@@ -74,13 +77,13 @@ const AllUsers = () => {
         ] : [
             {
                 header: 'Image',
-                accessorKey: 'profileImage',
+                accessorKey: 'photoUrl',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
             {
-                header: 'Nom et Prénom',
-                accessorKey: 'name',
+                header: 'Username',
+                accessorKey: 'username',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
@@ -91,8 +94,14 @@ const AllUsers = () => {
                 enableSorting: true,
             },
             {
-                header: 'Nombre Of Courses',
-                accessorKey: 'courses',
+                header: 'Address',
+                accessorKey: 'address',
+                enableColumnFilter: false,
+                enableSorting: true,
+            },
+            {
+                header: 'Phone Number',
+                accessorKey: 'phoneNumber',
                 enableColumnFilter: false,
                 enableSorting: true,
             },
@@ -102,6 +111,20 @@ const AllUsers = () => {
                 enableColumnFilter: false,
                 enableSorting: true,
             },
+            {
+                header: 'Availability',
+                accessorKey: 'isAvailable',
+                enableColumnFilter: false,
+                enableSorting: true,
+            },
+            {
+                header: 'Rating',
+                accessorKey: 'rating',
+                enableColumnFilter: false,
+                enableSorting: true,
+            },
+
+
             
         ],
         []
@@ -112,7 +135,7 @@ const AllUsers = () => {
             <React.Fragment>
             <div className="card w-full flex justify-center p-10">
                 <div className="card-body w-[95%] p-4  shadow-lg border border-gray-200">
-                    <h6 className="mb-4 text-15">Basic</h6>
+                    <h6 className="mb-4 text-15 uppercase">{param.role}s data</h6>
                     <TableContainer
                         type = 'users'
                         setCount={setCount}

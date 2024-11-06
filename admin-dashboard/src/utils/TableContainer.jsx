@@ -208,44 +208,8 @@ const TableContainer = ({
                   return (
                     <>
                       {
-                        // (cell.column.id === "isBanned" ? (
-                        //   <td>
-                        //     <Tooltip
-                        //       title={
-                        //         flexRender(
-                        //           cell.column.columnDef.cell,
-                        //           cell.getContext()
-                        //         ).props.getValue()
-                        //           ? "Unbann user"
-                        //           : "Bann user"
-                        //       }
-                        //     >
-                        //       <Switch
-                        //         id={cell.id}
-                        //         checked={flexRender(
-                        //           cell.column.columnDef.cell,
-                        //           cell.getContext()
-                        //         ).props.getValue()}
-                        //         // onChange={()=>handleSwitchChange(cell.id,!flexRender(
-                        //         //   cell.column.columnDef.cell,
-                        //         //   cell.getContext()
-                        //         // ).props.getValue())}
-                        //         onChange={(checked) =>{
-                        //           flexRender(cell.column.columnDef.cell,cell.getContext()).props.row.original.isBanned=checked
-                        //           setCounter(prev=>prev+1)
-                        //           console.log(flexRender(cell.column.columnDef.cell,cell.getContext()).props.row.original.isBanned);
-                                  
-                        //         }}
-                        //           // handleSwitchChange(
-                        //           //   cell.row.original.id,
-                        //           //   checked
-                        //           // )
-                        //         // }
-                        //       />
-                        //     </Tooltip>
-                        //   </td>
-                        // ) :
-                         cell.column.id === "profileImage" ? (
+            
+                         cell.column.id === "photoUrl" ? (
                           <td
                             key={cell.id}
                             className={`${tdclassName} text-center`}

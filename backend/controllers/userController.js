@@ -5,11 +5,47 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.getAllUsers = async (req, res) => {
+  let {role} = req.params
+  console.log(role);
+  
+  let users = []
   try {
-    const users = await prisma.user.findMany();
+    if(role ==="customer"){
+       users = await prisma.user.findMany({
+        where : {
+          userType : "CUSTOMER"
+        },
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          userType: true,
+          address: true,
+          phoneNumber: true,
+          photoUrl: true,
+          createdAt: true,
+        },
+      });
+    }
+    else if (role ==="provider"){
+       users = await prisma.serviceProvider.findMany({
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          isAvailable: true,
+          address: true,
+          phoneNumber: true,
+          photoUrl: true,
+          rating : true
+        },
+      });
+    }
     
     res.json(users);
   } catch (error) {
+    console.log(error.message);
+    
     res.status(500).json({ error: "Error fetching users" });
   }
 };
@@ -33,12 +69,12 @@ exports.login = async (req, res) => {
     }
 
     const accessToken = jwt.sign(
-      { userId: user.id, role: user.role },
+      { userId: user.id, role: user.userType },
       process.env.JWT_SECRET,
-      { expiresIn: "15m" }
+      { expiresIn: "15h" }
     );
     const refreshToken = jwt.sign(
-      { userId: user.id, role: user.role },
+      { userId: user.id, role: user.userType },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: "7d" }
     );

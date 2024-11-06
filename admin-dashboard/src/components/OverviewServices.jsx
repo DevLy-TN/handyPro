@@ -9,10 +9,8 @@ const OverviewServices = () => {
     document.title = "All services";
     fetch('http://localhost:3000/services')
       .then((response) => response.json())
-      .then((data) => {
-        console.log('/////////////',data);
-        
-        setServices(data);  // Assuming the API returns data under `data` key
+      .then((data) => {        
+        setServices(data);  
       })
       .catch((error) => {
         console.error(error);
@@ -43,6 +41,12 @@ const OverviewServices = () => {
       {
         header: 'Price ($)',
         accessorKey: 'price',
+        enableColumnFilter: false,
+        enableSorting: true,
+      },
+      {
+        header: 'Duration (min)',
+        accessorKey: 'duration',
         enableColumnFilter: false,
         enableSorting: true,
       },

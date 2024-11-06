@@ -8,8 +8,8 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "admin@handypro.com",
+      password: "h@ndyPro123",
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -19,7 +19,7 @@ const Login = () => {
     }),
     onSubmit: (values, { setSubmitting }) => {
       console.log("Form submitted with values:", values);
-      fetch("http://localhost:5000/api/auth/login", {
+      fetch("http://localhost:3000/users/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,8 +29,8 @@ const Login = () => {
         .then(async(response) => {
           const data=await response.json();
           console.log(data);
-          if (data.token) {
-            localStorage.setItem("token", data.token);
+          if (data.accessToken) {
+            localStorage.setItem("token", data.accessToken);
             setSuccess(true);
           }
         }).then(()=>{

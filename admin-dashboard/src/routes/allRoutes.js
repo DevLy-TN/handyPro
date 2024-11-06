@@ -8,8 +8,8 @@ const publicRoutes=[
 ]
 const privateRoutes=[
     {path:'/dashboard',component:Dashboard},
-    {path:'/Learner',component:AllUsers},
-    {path:'/Instructor',component:AllUsers},
+    {path:'/user/:role',component:AllUsers},
+    // {path:'/Instructor',component:AllUsers},
     {path:'/*',component:Dashboard}
 ]
 

@@ -13,12 +13,20 @@ const Layout = ({ children }) => {
             <a href="/dashboard">Dashboard</a>
           </li>
           <li className="hover:bg-gray-700 p-2 rounded">
-            <a href="/Learner">Learners</a>
+            <a href="/categories">Categories</a>
           </li>
           <li className="hover:bg-gray-700 p-2 rounded">
-            <a href="/Instructor">Instructors</a>
+            <a href="/user/provider">Service Providers</a>
           </li>
-       
+          <li className="hover:bg-gray-700 p-2 rounded">
+            <a href="/user/customer">Customers</a>
+          </li>
+          <li className="hover:bg-gray-700 p-2 rounded">
+            <a href="/Learner">Payment Analytics</a>
+          </li>
+          <li className="hover:bg-gray-700 p-2 rounded">
+            <a href="/Learner">Booking</a>
+          </li>
         </ul>
       </div>
       <div className="flex flex-col flex-1">
