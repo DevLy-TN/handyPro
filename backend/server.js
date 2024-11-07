@@ -24,6 +24,7 @@ app.use('/users', userRoutes);
 app.use('/services', serviceRoutes);
 app.use('/stats', analyticsRoutes);
 
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);

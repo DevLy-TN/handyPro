@@ -4,28 +4,28 @@ import Navbar from '../../components/Navbar'
 const Layout = ({ children }) => {
   return (
     <div className="flex h-screen">
-      <div className="w-64 bg-gray-800 text-white flex flex-col">
+      <div className="w-64 bg-blue-700 text-white flex flex-col">
         <div className="p-4 font-bold text-lg mt-6">
           Admin Dashboard
         </div>
         <ul className="flex flex-col space-y-2 p-4">
-          <li className="hover:bg-gray-700 p-2 rounded">
+          <li className="hover:bg-blue-600 p-2 rounded">
             <a href="/dashboard">Dashboard</a>
           </li>
-          <li className="hover:bg-gray-700 p-2 rounded">
+          <li className="hover:bg-blue-600 p-2 rounded">
             <a href="/categories">Categories</a>
           </li>
-          <li className="hover:bg-gray-700 p-2 rounded">
+          <li className="hover:bg-blue-600 p-2 rounded">
             <a href="/user/provider">Service Providers</a>
           </li>
-          <li className="hover:bg-gray-700 p-2 rounded">
+          <li className="hover:bg-blue-600 p-2 rounded">
             <a href="/user/customer">Customers</a>
           </li>
-          <li className="hover:bg-gray-700 p-2 rounded">
+          {/* <li className="hover:bg-blue-600 p-2 rounded">
             <a href="/Learner">Payment Analytics</a>
-          </li>
-          <li className="hover:bg-gray-700 p-2 rounded">
-            <a href="/Learner">Booking</a>
+          </li> */}
+          <li className="hover:bg-blue-600 p-2 rounded">
+            <a href="/bookings">Booking</a>
           </li>
         </ul>
       </div>

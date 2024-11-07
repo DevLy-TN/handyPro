@@ -2,17 +2,13 @@ import React ,{ useEffect,useMemo ,useState} from 'react';
 import TableContainer from "../../utils/TableContainer";
 import Layout from '../Layout/Layout';
 import axios from 'axios';
-import { useLocation ,useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 
 
 const AllUsers = () => {
-    // const location=useLocation()
     const param =useParams()
-    console.log(param);
-    
-    // console.log(location.pathname.slice(1));
-    
+
     const [users,setUsers] = useState([]);
     const [count,setCount]=useState(0)
     useEffect(() => {
