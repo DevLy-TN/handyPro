@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import logoLight from "../../assets/images/logoBlanc.jpg";
+import logoLight from "../../assets/handypro.svg";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
     const navigate = useNavigate();
@@ -102,8 +102,8 @@ const Login = () => {
       <p className="title text-center font-bold text-xl mb-6">Welcome back</p>
       <img
         src={logoLight}
-        height={20}
-        width={60}
+        height={80}
+        width={120}
         alt="Site Logo"
         className="mx-auto mb-6"
       />
@@ -139,7 +139,7 @@ const Login = () => {
         ) : null}
         <button
           type="submit"
-          className="form-btn bg-teal-500 text-white font-semibold rounded-lg px-4 py-2 shadow"
+          className="form-btn bg-blue-600 text-white font-semibold rounded-lg px-4 py-2 shadow"
           disabled={formik.isSubmitting}
         >
           {formik.isSubmitting ? "Logging in..." : "Log in"}

@@ -12,66 +12,7 @@ exports.getTotalUsers = async (req, res) => {
   const serviceProviders = await prisma.serviceProvider.count()
   res.json({ customers , serviceProviders });
 };
-
-exports.getActiveServiceProviders = async (req, res) => {
-  const activeProviders = await prisma.serviceProvider.count({
-    where: { isAvailable: true },
-  });
-  res.json({ activeProviders });
-};
-
-exports.getUsersByType = async (req, res) => {
-  const usersByType = await prisma.user.groupBy({
-    by: ['userType'],
-    _count: { userType: true },
-  });
-  res.json(usersByType);
-};
-
-exports.getNewUsers = async (req, res) => {
-  const lastMonth = new Date();
-  lastMonth.setMonth(lastMonth.getMonth() - 1);
-  const newUsers = await prisma.user.count({
-    where: { createdAt: { gte: lastMonth } },
-  });
-  res.json({ newUsers });
-};
-
-exports.getTotalServices = async (req, res) => {
-  const totalServices = await prisma.service.count();
-  res.json({ totalServices });
-};
-
-exports.getActiveServices = async (req, res) => {
-  const activeServices = await prisma.service.count({
-    where: { isActive: true },
-  });
-  res.json({ activeServices });
-};
-
-exports.getServicesByCategory = async (req, res) => {
-  const servicesByCategory = await prisma.category.findMany({
-    include: {
-      services: true,
-    },
-  });
-  res.json(servicesByCategory);
-};
-
-exports.getTotalBookings = async (req, res) => {
-  const totalBookings = await prisma.booking.count();
-  res.json({ totalBookings });
-};
-exports.getStatsBookings = async (req, res) => {
-  // method to retrieve all bookings , rejected bookings , pending bookings , Confirmed , cancelled , completed
-  // const bookings = await prisma.booking.groupBy({
-  //   by: ['status'],
-  //   _count: { status: true },
-  // }); 
-  //count Pending booking status
-  
-};
-exports.getBookingsByStatus = async (req, res) => {
+exports.  getBookingsByStatus = async (req, res) => {
   const pendingBookings = await prisma.booking.count({
     where: { status: 'PENDING' },
   });
@@ -103,56 +44,52 @@ exports.getBookingsByStatus = async (req, res) => {
   });
 };
 
-exports.getAverageBookingValue = async (req, res) => {
-  const result = await prisma.booking.aggregate({
-    _avg: { totalPrice: true },
+exports.getServicesByCategory = async (req, res) => {
+  const servicesByCategory = await prisma.category.findMany({
+    include: {
+      services: true,
+    },
   });
-  res.json({ averageBookingValue: result._avg.totalPrice });
+  res.json(servicesByCategory);
 };
+exports.allCategories = async (req,res)=>{
+  const categories = await prisma.category.findMany({
+    include: {
+      services: true,
+    },
+  });
+  res.json(categories);
+}
 
+exports.getActiveServiceProviders = async (req, res) => {
+  const activeProviders = await prisma.serviceProvider.count({
+    where: { isAvailable: true },
+  });
+  res.json({ activeProviders });
+};
 exports.getTotalRevenue = async (req, res) => {
   const revenue = await prisma.payment.aggregate({
     _sum: { amount: true },
     where: { status: 'COMPLETED' },
   });
-  res.json({ totalRevenue: revenue._sum.amount });
-};
-
-exports.getPaymentsByStatus = async (req, res) => {
-  const paymentsByStatus = await prisma.payment.groupBy({
-    by: ['status'],
-    _count: { status: true },
+  const bookings = await prisma.booking.findMany({
+    include: {
+      user :{
+        select :{
+          email : true ,
+        }
+      } , 
+      provider :{
+        select :{
+          email : true ,
+        }
+      } ,
+      service: {
+        select : {
+          name : true
+        }
+      },
+    },
   });
-  res.json(paymentsByStatus);
-};
-
-exports.getRevenueByPaymentMethod = async (req, res) => {
-  const revenueByMethod = await prisma.payment.groupBy({
-    by: ['paymentMethod'],
-    _sum: { amount: true },
-  });
-  res.json(revenueByMethod);
-};
-
-exports.getAverageRatingByService = async (req, res) => {
-  const ratingsByService = await prisma.review.groupBy({
-    by: ['serviceId'],
-    _avg: { rating: true },
-  });
-  res.json(ratingsByService);
-};
-
-exports.getTopRatedProviders = async (req, res) => {
-  const topProviders = await prisma.serviceProvider.findMany({
-    orderBy: { rating: 'desc' },
-    take: 10,
-  });
-  res.json(topProviders);
-};
-
-exports.getUnreadNotifications = async (req, res) => {
-  const unreadNotifications = await prisma.notification.count({
-    where: { isRead: false },
-  });
-  res.json({ unreadNotifications });
+  res.json({ totalRevenue: revenue._sum.amount , bookings });
 };

@@ -3,7 +3,7 @@ import useActiveLink from "../utils/useActiveLink";
 
 // Image
 
-import logoLight from "../assets/images/logoBlanc.jpg";
+import logoLight from "../assets/handypro.svg";
 import { Menu ,LogOut} from "lucide-react";
 import { Link,useNavigate } from "react-router-dom";
 

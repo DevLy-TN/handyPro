@@ -209,7 +209,7 @@ const TableContainer = ({
                     <>
                       {
             
-                         cell.column.id === "photoUrl" ? (
+                         cell.column.id === "photoUrl" || cell.column.id === "image"  ? (
                           <td
                             key={cell.id}
                             className={`${tdclassName} text-center`}
