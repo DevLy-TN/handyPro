@@ -42,7 +42,7 @@ const BookingRadialBar = () => {
       type: 'radialBar',
     },
     title: {
-      text: 'Courses Overview',
+      text: 'Booking Overview',
       align: 'center',
       style: {
         fontSize: '20px'
